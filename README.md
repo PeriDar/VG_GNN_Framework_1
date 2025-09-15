@@ -49,26 +49,26 @@ Each graph window integrates **price dynamics + volume conviction**, producing r
 
 ```mermaid
 flowchart TD
-    A[OHLCV Data] --> B[Preprocessing\n - Returns, RSI, ATR\n - Body/Wick ratios\n - Volume z-score, OBV]
-    B --> C[Labeling\n - 9-class patterns\n - Forward return regression]
-    B --> D[Sliding Window Extraction]
+    A[OHLCV Data] --> B[Preprocessing: indicators]
+    B --> C[Labeling: 9-class and returns]
+    B --> D[Sliding windows]
 
-    D --> E[Graph Construction\n(Multiplex VG)]
-    E --> E1[RVG Layer\n(Upward visibility)]
-    E --> E2[FVG Layer\n(Downward visibility)]
-    E --> E3[Volume Layer\n(Sequential/OBV edges)]
-    E1 --> F
+    D --> E[Graph construction: MDVG]
+    E --> E1[RVG layer]
+    E --> E2[FVG layer]
+    E --> E3[Volume layer]
+    E1 --> F[Graph + features]
     E2 --> F
     E3 --> F
 
-    F[Graph with\nNode + Edge Features] --> G[GNN Backbone\n(ECC, GatedGCN, GIN)]
+    F --> G[GNN backbone]
     G --> H[Global Attention Pooling]
-    H --> I1[Classification Head\n(9-class patterns)]
-    H --> I2[Regression Head\n(Forward returns)]
+    H --> I1[Classification head]
+    H --> I2[Regression head]
 
-    I1 --> J[Evaluation\n- Accuracy/F1\n- Macro-F1\n- Confusion Matrix]
+    I1 --> J[Evaluation: Accuracy F1]
     I2 --> J
-    J --> K[Backtest\n- Sharpe Ratio\n- Calmar Ratio]
+    J --> K[Backtest: Sharpe Calmar]
 ```
 
 ---
