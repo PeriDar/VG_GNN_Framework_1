@@ -1,0 +1,19 @@
+# Core
+numpy
+pandas
+scikit-learn
+pyyaml
+matplotlib
+tqdm
+
+# PyTorch (install a version compatible with your GPU/CPU)
+torch
+torchvision
+torchaudio
+
+# PyTorch Geometric (install wheels matching your torch/CUDA)
+torch-geometric
+torch-scatter
+torch-sparse
+torch-cluster
+torch-spline-conv

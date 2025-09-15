@@ -1,0 +1,50 @@
+# Experiment config for Framework 1 (Multiplex Directional VG)
+
+seed: 42
+
+# Data
+csv_path: data/ASSET.csv # single-asset CSV
+asset_name: ASSET
+
+# Windowing & labels
+window_length: 40 # base length for RVG/FVG
+step: 1 # stride between windows
+horizons: [1, 5] # two horizons → 3x3 = 9 classes
+flat_threshold_bps: 5 # +/- 5 bps deadzone for FLAT per horizon
+
+# Splits (ISO dates or index positions)
+train_end: 2022-12-31
+val_end: 2023-12-31
+
+# Graph options
+use_fvg: true # add falling edges
+use_volume_edges: true # consecutive edges with volume/OBV features
+max_vis_span: 80 # optional cap for j-i (avoid very long edges)
+
+# Features
+use_structural_features: true # degree/clustering after graph build
+rsi_period: 14
+atr_period: 14
+
+# Model
+model: edge_ecc # [edge_ecc | gin]
+hidden_dim: 64
+num_layers: 2
+readout: gap # [gap | mean | set2set]
+
+# Training
+batch_size: 64
+lr: 0.001
+weight_decay: 0.0
+max_epochs: 80
+patience: 12
+lambda_reg: 0.5 # weight for regression loss
+class_weighting: true
+
+# Backtest
+cost_bps: 1.0 # round-trip cost (bps), simplistic
+slippage_bps: 2.0 # added to cost per round-trip
+position_horizon: 1 # use 1-step directional head for backtest
+
+# Output
+out_dir: runs

@@ -1,0 +1,39 @@
+# Lighter config for quick Colab/local debug
+seed: 42
+csv_path: data/ASSET.csv
+asset_name: ASSET
+
+window_length: 20
+step: 2
+horizons: [1, 5]
+flat_threshold_bps: 7
+
+train_end: 2021-12-31
+val_end: 2022-06-30
+
+use_fvg: true
+use_volume_edges: false
+max_vis_span: 60
+
+use_structural_features: true
+rsi_period: 14
+atr_period: 14
+
+model: gin
+hidden_dim: 32
+num_layers: 2
+readout: gap
+
+batch_size: 32
+lr: 0.001
+weight_decay: 0.0
+max_epochs: 30
+patience: 8
+lambda_reg: 0.3
+class_weighting: true
+
+cost_bps: 1.0
+slippage_bps: 2.0
+position_horizon: 1
+
+out_dir: runs
